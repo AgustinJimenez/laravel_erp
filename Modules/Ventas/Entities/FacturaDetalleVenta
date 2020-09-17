@@ -1,0 +1,19 @@
+<?php namespace Modules\Ventas\Entities;
+   
+use Illuminate\Database\Eloquent\Model;
+
+class FacturaDetalleVenta extends Model {
+
+	protected $table = 'ventas_factura_detalles';
+    protected $fillable = 
+    [
+    	'factura_id',
+    	'cantidad',
+        'descripcion',
+        'iva',
+        'precio_unitario',
+        'sub_total',
+        'total'
+    ];
+
+}

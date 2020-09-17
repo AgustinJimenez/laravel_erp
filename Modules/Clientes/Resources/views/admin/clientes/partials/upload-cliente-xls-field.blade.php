@@ -1,0 +1,1 @@
+@include('media::admin.fields.new-file-link-single', ['zone' => 'archivo'])

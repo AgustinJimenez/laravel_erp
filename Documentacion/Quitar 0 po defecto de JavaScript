@@ -1,0 +1,2 @@
+ if( nombre=='0' )
+    $("input[name=nombre]").val('&nbsp;') 

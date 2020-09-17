@@ -1,0 +1,296 @@
+	<============================================================================================================================================
+	================================================PAGO DE SALARIOS=============================================================================
+	=============================================================================================================================================
+	|Al generarse un pago de salario se crea un asiento del tipo PagoEmpleado
+	|
+	|comentario: apellido_empleado nombre_empleado
+	|operacion: Pago de Empleado
+	|
+	|	si (tiene ips Y salario > 0)
+	|											DEBE					HABER
+	|										------------------------------
+	|		Sueldos y Jornales				|(salario*0.91)+extra		0
+	|										|
+	|		Aporte patronal					|salario*0.165				0
+	|										|
+	|		Ips o seguros pagados			|salario*0.09				0
+	|										|
+	|		Ips y aporte patronal a pagar	|	0						salario*0.165 + salario*0.09   /Obligaciones Laborales Y Cargas Sociales
+	|										|
+	|		Caja							|	0						(salario*0.91)+extra
+	|
+	|	sino
+	|
+	|											DEBE					HABER
+	|										------------------------------
+	|		Sueldos y Jornales				|salario + extra			0
+	|										|
+	|		Caja							|	0						salario + extra
+	=============================================================================================================================================
+****
+****
+****
+	<============================================================================================================================================
+	================================================COMPRA=======================================================================================
+	=============================================================================================================================================
+	|Al generarse una compra si el tipo de factura es 'contado' se crea un asiento compra
+	|	
+	|	comentario:	Compras
+	|	observacion: proveedor_razon_social
+	|
+	|	si (total iva > 0)
+	|										DEBE					HABER
+	|									------------------------------
+	|		Costo de mercad grav por iva|	monto_total-total_iva	0				
+	|									|
+	|		IVA - Credito Fiscal		|	total_iva				0
+	|									|
+	|		Caja						|	0						monto_total
+	|									|____________________________
+	|
+	|	sino
+	|										DEBE					HABER
+	|									---------------------------------
+	|		Cost de mercad excent de iva|	monto_total 			0
+	|									|
+	|		Caja						|	0						monto_total
+	|___________________________________|________________________________________________
+	|
+	|Al generarse una compra si el tipo de factura es 'credito' se crea un asiento compra
+	|	
+	|	comentario: proveedor_razon_social
+	|	operacion: Compras
+	|
+	|
+	|	si (total iva > 0)
+	|
+	|													DEBE					HABER
+	|												--------------------------------------
+	|		Proveedores Locales						|	0   					monto_total
+	|												|
+	|		Costos de Mercaderias Gravada por el IVA|	monto_total-total_iva	0
+	|												|
+	|		IVA - Credito Fiscal					|	total_iva 				0
+	|												|_____________________________
+	|	sino
+	|
+	|													DEBE					HABER
+	|												------------------------------
+	|		Proveedores Locales						|	0   					monto_total
+	|												|
+	|		Variante								|	monto_total 			0
+	|____________________________________________________________________________________________________________________________________________
+	|Al generarse una compra si el total pagado es mayor a 0 se genera un pago y si el tipo de factura es 'credito' se genera un asiento del pago
+	|
+	|comentario: Pago de Documentos de Compras
+	|operacion: Pagos
+	|
+	|									DEBE		HABER
+	|								-----------------------------
+	|Caja 							|	0			x
+	|								|
+	|Anticipos a Proveedores Locales|	x			0
+	|_______________________________|_________________________________________________________________
+	|												
+	|
+	|
+	=============================================================================================================================================
+****
+****
+****
+	<============================================================================================================================================
+	================================================VENTA========================================================================================
+	=============================================================================================================================================
+	|EN CREAR VENTA O PREVENTA:
+	|	
+	|	
+	|
+	|	si (total_pagado > 0 Y tipo = preventa)
+	|		Asiento del tipo Pagofacturacredito
+	|
+	|		comentario: Anticipo recibido segun nro de recibo
+	|		operacion: Anticipos Recibidos
+	|
+	|												DEBE			HABER
+	|											------------------------------
+	|		Caja								|	total_pagado	0
+	|											|
+	|		Anticipos de Clientes				|	0				total_pagado
+	|											|______________________________
+	|------------------------------------------------------------------------
+	|
+	|si (tipo_factura es a contado)
+	|	Se crea asiento de factura
+	|	
+	|		
+	|	SI (total_iva>0)
+	|
+	|		operacion: Ventas
+	|		comentario: cliente_razon_social
+	|												DEBE			HABER
+	|											------------------------------
+	|		Caja								|	monto_total 	0
+	|											|
+	|		Vent de Mercad Gravad por el IVA	|	0				monto_total-total_iva
+	|											|
+	|											|
+	|		IVA - Credito Fiscal				|	0				total_iva
+	|											|______________________________
+	|
+	|
+	|	SINO
+	|
+	|		operacion: Ventas
+	|		comentario: cliente_razon_social
+	|
+	|													DEBE			HABER
+	|												------------------------------
+	|		Caja									|	total_pagado	0
+	|												|					
+	|		Ventas de Merc Exent del IVA 			|	0				monto_total
+	|												|______________________________
+	|______________________________________________________________________________				
+	|SI (tipo_factura es a credito)
+	|	Asiento de tipo Factura
+	|	comentario: cliente_razon_social
+	|	operacion: Ventas
+	|
+	|	si(total_iva > 0)
+	|												DEBE			HABER
+	|											------------------------------
+	|		Deudores por Ventas					|	monto_total 	0
+	|											|
+	|		Vent de Mercad Gravad por el IVA	|		0			monto_total-total_iva
+	|											|
+	|		IVA - Credito Fiscal				|		0			total_iva
+	|											|________________________________
+	|	sino
+	|												DEBE			HABER
+	|											------------------------------
+	|		Deudores por Ventas					|	monto_total 	0
+	|											|
+	|		Ventas de Merc Exent del IVA		|		0			monto_total-total_iva
+	|______________________________________________________________________________________
+	|						
+	|
+	|asiento de pago tipo pago de factura
+	|		comentario:Cobranza segun numero de recibo
+	|		operacion: Recibos
+	|												DEBE			HABER
+	|											------------------------------
+	|				Caja						|	total_pagado	0
+	|											|
+	|				Deudores por Ventas			|	0				total_pagado
+	|
+	|
+	|_______________________________________________________________________________________
+	|
+	|
+	|
+	|VENTA UPDATE
+	|	SI (pago_final > 0 Y tipo_factura es a credito)
+	|			se crea asiento de tipo pago Factura
+	|
+	|		observacion: Cobranza segun numero de recibo
+	|		operacion: Recibos
+	|			
+	|											DEBE			HABER
+	|										------------------------------
+	|			Caja						|	pago_final		0
+	|										|
+	|			Anticipos de Clientes		|	0				pago_final
+	|
+	|
+	|_________________________________________________________________________
+	|	SE GENERA ASIENTO DE FACUTRA 
+	|
+	|		observacion: cliente_razon_social
+	|		operacion: Ventas
+	|
+	|		SI (tipo_factura es al contado)
+	|
+	|
+	|			SI total_iva > 0 
+	|
+	|														DEBE				HABER
+	|													-------------------------------------------------
+	|				Caja								|	pago_final			0
+	|													|
+	|				Anticipos de Clientes				|	entrega
+	|													|
+	|				Ventas de Merc Gravad por el IVA	|	0			monto_total-total_iva
+	|													|
+	|				IVA - Credito Fiscal				|	0			total_iva
+	|													|________________________________________________
+	|			SINO
+	|														DEBE				HABER
+	|													-------------------------------------------------
+	|				Caja								|	pago_final			0
+	|													|
+	|				Anticipos de Clientes				|	entrega
+	|													|
+	|				Ventas de Mercad Exentas del IVA	|	0			monto_total			
+	|													|_________________________________________________
+	|													
+	|		SI (tipo_factura es a credito)
+	|				
+	|				SI (total_iva > 0)
+	|														DEBE							HABER
+	|													---------------------------------------------
+	|					Deudores por ventas				|	monto_total-(final+entrega)		0
+	|													|
+	|					Anticipos de Cilentes			|	entega+pago_final				0
+	|													|
+	|					Ventas de Merc Gravad por el IVA|	0								monto_total - total_iva
+	|													|
+	|					IVA - Credito Fiscal			|	0								total_iva,
+	|													|_____________________________________________
+	|				SINO
+	|														DEBE							HABER
+	|													-------------------------------------------------
+	|					Deudores por ventas				|	monto_total-(final+entrega)			0
+	|													|
+	|					Anticipos de Clientes			|	entrega+pago_final	0
+	|													|
+	|					Ventas de Mercad Exentas del IVA|	0								monto_total			
+	|													|_________________________________________________
+	============================================================================================================
+****
+****
+****
+	<============================================================================================================================================
+	================================================PAGO_VENTA==================================================================================
+	=============================================================================================================================================
+	|
+	|	SE CREA ASIENTO DE PAGO VENTA:
+	|
+	|		comentario: Cobranza segun numero de recibo
+	|		operacion: Recibos
+	|
+	|											DEBE		HABER
+	|										------------------------------
+	|		Caja							|	monto 		0
+	|										|
+	|		Deudores por Ventas				|	0			monto
+	|
+	===========================================================================================================================================
+****
+****
+****
+	<============================================================================================================================================
+	================================================PAGO_COMPRA==================================================================================
+	=============================================================================================================================================
+	|
+	|	SE CREA ASIENTO DE PAGO COMPRA:
+	|
+	|		comentario: Pago de Documentos de Compras
+	|		operacion: Pagos
+	|
+	|											DEBE		HABER
+	|										------------------------------
+	|		Caja							|	0 			monto
+	|										|
+	|		Proveedores Locales				|	monto			0
+	|
+	===========================================================================================================================================
+

@@ -1,0 +1,9 @@
+.idea/
+.php_cs.cache
+vendor/
+Modules/
+composer.lock
+/*
+!.gitignore
+!Sidebar
+!Http

@@ -1,0 +1,17 @@
+{
+    "name": "Pagofacturascredito",
+    "alias": "pagofacturascredito",
+    "description": "",
+    "version": "v0.1",
+    "keywords": [],
+    "active": 1,
+    "order": 1,
+    "providers": [
+        "Modules\\Pagofacturascredito\\Providers\\PagofacturascreditoServiceProvider",
+        "Modules\\Pagofacturascredito\\Providers\\RouteServiceProvider"
+    ],
+    "aliases":{},
+    "files": [
+        
+    ]
+}

@@ -1,0 +1,12 @@
+<style type="text/css">
+
+.ui-autocomplete {
+position: absolute;
+z-index: 2150000000 !important;
+cursor: default;
+border: 2px solid #ccc;
+padding: 5px 0;
+border-radius: 2px;
+}
+
+</style>

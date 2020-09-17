@@ -1,0 +1,9 @@
+-sudo nano /etc/mysql/my.cfg
+
+
+
+mysql --user="root" --password="root" --execute="SHOW VARIABLES LIKE 'max_connections';"
+
+
+
+mysql --user="root" --password="root" --execute="SET GLOBAL max_connections=1500"

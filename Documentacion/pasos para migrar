@@ -1,0 +1,12 @@
+php artisan migrate
+-Clientes
+-Proveedores
+-Cristales
+-Productos
+-Servicios
+-Caja
+php artisan module:migrate
+
+php artisan asgard:install
+
+php artisan module:seed contabilidad

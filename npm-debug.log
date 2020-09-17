@@ -1,0 +1,77 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/nodejs',
+1 verbose cli   '/usr/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   'https://github.com/1000hz/validator-remote-example#running-the-example' ]
+2 info using npm@2.15.11
+3 info using node@v4.7.2
+4 verbose install initial load of /home/agus/repo/artronic_web/package.json
+5 warn package.json @ No repository field.
+6 warn package.json @ No license field.
+7 verbose installManyTop reading scoped package data from /home/agus/repo/artronic_web/node_modules/gulp/package.json
+8 verbose installManyTop reading scoped package data from /home/agus/repo/artronic_web/node_modules/laravel-elixir/package.json
+9 verbose readDependencies loading dependencies from /home/agus/repo/artronic_web/package.json
+10 silly cache add args [ 'https://github.com/1000hz/validator-remote-example#running-the-example',
+10 silly cache add   null ]
+11 verbose cache add spec https://github.com/1000hz/validator-remote-example#running-the-example
+12 silly cache add parsed spec Result {
+12 silly cache add   raw: 'https://github.com/1000hz/validator-remote-example#running-the-example',
+12 silly cache add   scope: null,
+12 silly cache add   name: null,
+12 silly cache add   rawSpec: 'https://github.com/1000hz/validator-remote-example#running-the-example',
+12 silly cache add   spec: 'git+https://github.com/1000hz/validator-remote-example.git#running-the-example',
+12 silly cache add   type: 'hosted',
+12 silly cache add   hosted:
+12 silly cache add    { type: 'github',
+12 silly cache add      ssh: 'git@github.com:1000hz/validator-remote-example.git#running-the-example',
+12 silly cache add      sshUrl: 'git+ssh://git@github.com/1000hz/validator-remote-example.git#running-the-example',
+12 silly cache add      httpsUrl: 'git+https://github.com/1000hz/validator-remote-example.git#running-the-example',
+12 silly cache add      gitUrl: 'git://github.com/1000hz/validator-remote-example.git#running-the-example',
+12 silly cache add      shortcut: 'github:1000hz/validator-remote-example#running-the-example',
+12 silly cache add      directUrl: 'https://raw.githubusercontent.com/1000hz/validator-remote-example/running-the-example/package.json' } }
+13 verbose addRemoteGit caching https://github.com/1000hz/validator-remote-example#running-the-example
+14 verbose addRemoteGit git+https://github.com/1000hz/validator-remote-example.git#running-the-example is a repository hosted by github
+15 silly tryClone cloning git+https://github.com/1000hz/validator-remote-example.git#running-the-example via git+https://github.com/1000hz/validator-remote-example.git#running-the-example
+16 verbose tryClone https-github-com-1000hz-validator-remote-example-git-6c5cd222 not in flight; caching
+17 verbose correctMkdir /home/agus/.npm/_git-remotes correctMkdir not in flight; initializing
+18 verbose makeDirectory /home/agus/.npm/_git-remotes creation not in flight; initializing
+19 silly makeDirectory /home/agus/.npm/_git-remotes uid: 1000 gid: 1000
+20 info git [ 'clone',
+20 info git   '--template=/home/agus/.npm/_git-remotes/_templates',
+20 info git   '--mirror',
+20 info git   'https://github.com/1000hz/validator-remote-example.git',
+20 info git   '/home/agus/.npm/_git-remotes/https-github-com-1000hz-validator-remote-example-git-6c5cd222' ]
+21 verbose mirrorRemote git+https://github.com/1000hz/validator-remote-example.git#running-the-example git clone https://github.com/1000hz/validator-remote-example.git
+22 verbose correctMkdir /home/agus/.npm/_git-remotes correctMkdir not in flight; initializing
+23 verbose setPermissions git+https://github.com/1000hz/validator-remote-example.git#running-the-example set permissions on /home/agus/.npm/_git-remotes/https-github-com-1000hz-validator-remote-example-git-6c5cd222
+24 verbose resolveHead git+https://github.com/1000hz/validator-remote-example.git#running-the-example original treeish: running-the-example
+25 info git [ 'rev-list', '-n1', 'running-the-example' ]
+26 error git rev-list -n1 running-the-example: fatal: ambiguous argument 'running-the-example': unknown revision or path not in the working tree.
+26 error git rev-list -n1 running-the-example: Use '--' to separate paths from revisions, like this:
+26 error git rev-list -n1 running-the-example: 'git <command> [<revision>...] -- [<file>...]'
+27 verbose stack Error: Command failed: git rev-list -n1 running-the-example
+27 verbose stack fatal: ambiguous argument 'running-the-example': unknown revision or path not in the working tree.
+27 verbose stack Use '--' to separate paths from revisions, like this:
+27 verbose stack 'git <command> [<revision>...] -- [<file>...]'
+27 verbose stack
+27 verbose stack     at ChildProcess.exithandler (child_process.js:213:12)
+27 verbose stack     at emitTwo (events.js:87:13)
+27 verbose stack     at ChildProcess.emit (events.js:172:7)
+27 verbose stack     at maybeClose (internal/child_process.js:854:16)
+27 verbose stack     at Socket.<anonymous> (internal/child_process.js:330:11)
+27 verbose stack     at emitOne (events.js:77:13)
+27 verbose stack     at Socket.emit (events.js:169:7)
+27 verbose stack     at Pipe._onclose (net.js:487:12)
+28 verbose cwd /home/agus/repo/artronic_web
+29 error Linux 4.4.0-59-generic
+30 error argv "/usr/bin/nodejs" "/usr/bin/npm" "install" "https://github.com/1000hz/validator-remote-example#running-the-example"
+31 error node v4.7.2
+32 error npm  v2.15.11
+33 error code 128
+34 error Command failed: git rev-list -n1 running-the-example
+34 error fatal: ambiguous argument 'running-the-example': unknown revision or path not in the working tree.
+34 error Use '--' to separate paths from revisions, like this:
+34 error 'git <command> [<revision>...] -- [<file>...]'
+35 error If you need help, you may report this error at:
+35 error     <https://github.com/npm/npm/issues>
+36 verbose exit [ 1, true ]

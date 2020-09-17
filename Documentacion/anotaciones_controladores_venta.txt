@@ -1,0 +1,208 @@
+crear preventa
+
+	Redirige a VentaController@create con el dato isPreventa=1
+
+	verificacion de si hay caja activa 
+
+	envia a Modules/Ventas/Resources/views/admin/ventas/create.blade.php
+
+	con el dato de esventa=false, esotros = false, espreventa = true
+
+	tambien envia muchos otros datos como 'clientes','cristales','productos','servicios','isVenta','isPreventa','isOtros','categorias','cristales','tipos','nro_factura','nro_seguimiento', 'fecha', 'debe_id','haber_id' 
+
+	ya en la vista:
+
+	se pone el titulo principal a 'Preventa'
+
+	se agregar el modal de preventa que contiene nro de sobre, total a pagar, 
+
+	entrega, vuelto, forma de pago, tipo de factura, (generar factura es false), (isPreventa = true)
+
+	se agregar el boton de crear Preventa que llama a dicho modal
+
+	al submitear los datos van al store
+
+	la venta creada tiene estado='preventa', tipo='preventa'
+
+	si (entrega >= monto_total) entonces estado = "terminado" 
+
+	SI(es preventa) entonces redirige a index_preventa
+
+	en la vista de index-preventa entre los filtros hay un filtro 
+
+	oculto que contiene el valor 'preventa', este se envia al ajax
+
+crear venta
+
+	Redirige a VentaController@create con el dato isVenta=1
+
+	cargar los valores isPreventa=false, isOtros=false, isVenta=true
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+VentaController@indexAjax
+
+	si (estado = terminado)
+	{
+		Consulta de todas las ventas
+		join con clientes, leftjoin con facturaventa
+		, ordenar por fecha en desc, 
+
+		seleccionar de esa consulta 
+		(todo lo que sea de la tabla de ventas, 			nro de factura de la tabla facturaventas, 
+		razon social de tabla clientes, 
+		factura id de la tabla facturaventas)
+		
+		luego se filtra si estado de venta = terminado, 
+		se filtra si tipo es (preventa o venta)
+		  
+	
+	}
+	sino 
+	{
+		Consulta de todas las ventas
+		join con clientes, leftjoin con facturaventa
+		, ordenar por fecha en desc,
+
+		seleccionar de esa consulta 
+		(todo lo que sea de la tabla de ventas, 			nro de factura de la tabla facturaventas, 
+		razon social de tabla clientes, 
+		factura id de la tabla facturaventas)
+	}
+
+	luego dentro de la funcion del datatable
+	{
+			
+	
+		filtro fecha inicio		
+
+		filtro fecha fin	
+
+		filtro like nro de seguimiento
+
+		filtro like razon social
+
+		filtro like nro factura
+
+		filtro like estado
+
+		filtro like anulado
+	}
+
+FacturaVentaController@index_ajax
+	
+
+
+	si( isOtros ) //datos desde el  sidebar
+	{
+		Consulta de todas las facturasventas 
+		leftjoin con ventas,
+		leftjoin con detallesventas,
+		leftjoin con usuario que creo,
+		leftjoin con usuario que edito,
+		
+		filtro donde no tenga ni producto ni servicio ni cristal
+		
+		de la consulta seleccionar
+		(
+			id de facturaventa,		
+			fecha de facturaventa,
+			nrofactura de facturaventa,
+			razon social de cliente,
+			anulado de facturaventa,
+			monto total de facturaventa,
+			total pagado de facturaventa,
+			usuario que creo de users,
+			usuario que edito de users,
+		)
+
+
+	}
+	sino
+	{
+		Consulta de todas las facturasventas 
+		leftjoin con ventas,
+		leftjoin con detallesventas,
+		leftjoin con usuario que creo,
+		leftjoin con usuario que edito,
+		
+		de la consulta seleccionar
+		(
+			id de facturaventa,		
+			fecha de facturaventa,
+			nrofactura de facturaventa,
+			razon social de cliente,
+			anulado de facturaventa,
+			monto total de facturaventa,
+			total pagado de facturaventa,
+			usuario que creo de users,
+			usuario que edito de users,
+		)
+		
+		luego dentro de la funcion del datatable
+		{
+			si (pendiente = true) //dato del sidebar
+			{
+				se le agregar variable pendiente a url
+				de editar(DETALLES)
+			}
+
+			filtro fecha inicio
+			
+			filtro fecha fin
+
+			filtro like nro_seguimiento
+
+			filtro like razon_social
+
+			filtro like nro_factura
+
+			si(pendiente = false)//dato del sidebar
+			{
+				filtro anulado
+
+				filtro si total_pagado >= monto_total
+			}
+			sino
+			{
+							
+				filtro si total_pagado < monto_total )			 	
+				filtro donde no sea anulado
+			}
+			
+		}
+		
+
+
+		
+
+	}
+
+
+
+
+
+
+		
+

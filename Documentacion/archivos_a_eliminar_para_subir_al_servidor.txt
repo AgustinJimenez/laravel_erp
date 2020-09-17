@@ -1,0 +1,10 @@
+Archivos que se pueden eliminar de un Proyecto
+Descripción: Para reducir el tamaño del proyecto en un hosting con poco espacio se pueden eliminar directorios sin utilidad.
+Lista de directorios que se pueden eliminar:
+- .git/ => git no se utiliza en el servidor
+- Themes/Adminlte/assets => directorio no necesario, se utiliza desde public/
+- Themes/Adminlte/resources => directorio  no necesario, se utiliza desde public/
+- Themes/Flatly => eliminar en caso de tener otro tema frontend
+- Themes/Flatly/assets => no utilizado, duplicado
+- public/themes/flatly => tema no utilizado
+Tags: archivos, eliminar, directorios, servidor, proyecto

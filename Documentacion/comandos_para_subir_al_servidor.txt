@@ -1,0 +1,11 @@
+sudo chmod -R 644 artronic_web &&
+sudo chmod -R 755 artronic_web/public &&
+sudo chmod -R 755 artronic_web/storage &&
+for d in $(sudo find artronic_web -type d -print0 | xargs -0); do chmod 755 $d; done
+
+
+
+
+
+sudo chmod -R 644 artronic_web &&
+for d in $(sudo find artronic_web -type d -print0 | xargs -0); do chmod 755 $d; done

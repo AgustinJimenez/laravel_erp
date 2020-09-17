@@ -1,0 +1,8 @@
+-Clientes tiene seeders fakes
+-Proveedores tiene seeders fakes
+-Empleados tiene seeders fakes
+-Servicios tiene seeders fakes(hacer 2 o 3 veces)
+-Cristales tiene seeders para Categorias y Cristales, tipos se crean manualmente
+-Productos tiene seeders fakes para Categorias y Marcas, productos se crean manualmente
+-Contabilidad Tiene algunos seeders, el importante es tipo cuenta, cuenta se puede comentar desde ContabilidadDatabaseSeeder
+-Ventas tiene seeders para su configuracion de factura

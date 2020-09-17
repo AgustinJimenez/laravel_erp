@@ -1,0 +1,15 @@
+<?php namespace Modules\Compras\Entities;
+   
+use Illuminate\Database\Eloquent\Model;
+
+class CompraFacturaConfig extends Model {
+
+	protected $table = 'compras_facturas_config';
+    protected $fillable = 
+    [
+    	'nro_factura_1',
+    	'nro_factura_2',
+    	'nro_factura_ai'
+    ];
+
+}

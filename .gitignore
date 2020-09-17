@@ -1,0 +1,8 @@
+/vendor
+app/storage
+!gitignore
+/.phpintel
+/.env
+!public
+node_modules
+dot_git_old

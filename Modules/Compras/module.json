@@ -1,0 +1,17 @@
+{
+    "name": "Compras",
+    "alias": "compras",
+    "description": "",
+    "version": "v0.1",
+    "keywords": [],
+    "active": 1,
+    "order": 1,
+    "providers": [
+        "Modules\\Compras\\Providers\\ComprasServiceProvider",
+        "Modules\\Compras\\Providers\\RouteServiceProvider"
+    ],
+    "aliases":{},
+    "files": [
+        
+    ]
+}
